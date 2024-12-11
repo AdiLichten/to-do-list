@@ -1,9 +1,26 @@
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --text-color: #2c3e50;
+  --background-color: #f4f6f7;
+  --card-background: #ffffff;
+  --border-color: #e0e4e6;
+}
+
+body {
+  background-color: var(--background-color);
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+}
 
 .TasksContainer {
-  background-color: blue;
-  width: 50%;
-  margin: auto;
-  margin-top: 10vh;
-  overflow-y: scroll;
-  height: 80vh;
+  background-color: var(--background-color);
+  width: 90%;
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  overflow-y: auto;
+  max-height: 80vh;
 }
