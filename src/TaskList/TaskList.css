@@ -1,0 +1,9 @@
+
+.TasksContainer {
+  background-color: blue;
+  width: 50%;
+  margin: auto;
+  margin-top: 10vh;
+  overflow-y: scroll;
+  height: 80vh;
+}
