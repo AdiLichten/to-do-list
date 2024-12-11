@@ -4,6 +4,8 @@ import NewTask from '../TaskItem/NewTask';
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 
+Modal.setAppElement('#root');
+
 function TaskList() {
 
   const [tasks, setTasks] = useState([{ title: 'Morning Exercise', description: 'Complete a 30-minute workout session.', deadline: '2024-12-12', status: 'Pending' },
@@ -35,7 +37,7 @@ function TaskList() {
   };
 
   return (
-    <div className="TaskList">
+    <div id='root' className="TaskList">
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

@@ -8,7 +8,10 @@ function Task({ index, title, description, deadline, status, updateTask }) {
     const [taskDeadline, setTaskDeadline] = useState(deadline);
     const [taskStatus, setTaskStatus] = useState(status);
     const isExpired = taskDeadline < new Date().toISOString().split('T')[0];
+
     const expiredStyle = isExpired ? { color: 'red' } : {};
+
+    const getStatus = taskStatus === 'Pending' ? { color: 'red' } : taskStatus === 'In Progress' ? { color: 'blue' } : { color: 'green' };
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -39,7 +42,7 @@ function Task({ index, title, description, deadline, status, updateTask }) {
             <div className="TaskTitle">{taskTitle} </div>
             <div className="TaskDescription">{taskDescription}</div>
             <div className="TaskDeadline" style={expiredStyle}>{taskDeadline}</div>
-            <div className="TaskStatus">{taskStatus}</div>
+            <div className="TaskStatus" style={getStatus}>{taskStatus}</div>
             <button className="EditButton" onClick={handleEdit}>edit</button>
             <Modal
                 isOpen={modalIsOpen}
