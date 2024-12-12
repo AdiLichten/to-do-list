@@ -1,15 +1,31 @@
 import './Task.css';
 import { useState } from 'react';
-function NewTask({ addTask }) {
+import { db, addDoc, collection } from '../firebaseConfig';
+
+function NewTask({ closeModal }) {
 
     const [taskTitle, setTaskTitle] = useState(null);
     const [taskDescription, setTaskDescription] = useState(null);
     const [taskDeadline, setTaskDeadline] = useState(null);
     const [taskStatus, setTaskStatus] = useState(null);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        addTask({ title: taskTitle, description: taskDescription, deadline: taskDeadline, status: taskStatus });
+        if (!taskTitle || !taskDescription || !taskDeadline || !taskStatus || taskStatus === 'select') {
+            alert('Attention: Please fill in all fields.');
+            return;
+        }
+        try {
+            await addDoc(collection(db, 'tasks'), {
+                title: taskTitle,
+                description: taskDescription,
+                deadline: taskDeadline,
+                status: taskStatus
+            });
+            closeModal();
+        } catch (e) {
+            alert('Error adding document:', e);
+        }
     };
 
     return (
@@ -18,6 +34,7 @@ function NewTask({ addTask }) {
             <input className="TaskDescription" type="text" placeholder="task description" onChange={(e) => setTaskDescription(e.target.value)} required />
             <input className="TaskDeadline" type="date" onChange={(e) => setTaskDeadline(e.target.value)} required />
             <select className="TaskStatus" onChange={(e) => setTaskStatus(e.target.value)} required>
+                <option value="select">Please select a status</option>
                 <option value="Pending">Pending</option>
                 <option value="In Progress">In Progress</option>
                 <option value="Completed">Completed</option>
